@@ -4,7 +4,7 @@ import { IStandardActivity } from '../models/standard-activity.model';
 import { IRootState } from '../store';
 import { Id } from '../utils/types';
 import { ActivityReportSheetState } from './activity-report-sheet.state';
-import { SheetCell, SheetRow } from './timesheet/common-types';
+import { Cells, SheetCell, SheetRow } from './timesheet/common-types';
 
 const selectRoot = (state: IRootState) => state.activityReport;
 
@@ -89,3 +89,31 @@ export const dayTotalSelector = (day: string) => (state: IRootState) =>
       }, 0);
     }
   )(state, day);
+
+export const sheetTotalSelector = (state: IRootState) =>
+  createSelector(
+    sheetDataSelector,
+    (
+      entities: Record<string, SheetRow<IActivityReport, IStandardActivity>>
+    ) => {
+      return Object.keys(entities).reduce((total, activityReportId) => {
+        const cells: Cells<IStandardActivity> =
+          entities[activityReportId].entities;
+        return (
+          total +
+          Object.keys(cells).reduce((cellsTotal, cellId) => {
+            const cell: SheetCell<IStandardActivity> = cells[cellId];
+            let sum = 0;
+
+            if (cell) {
+              const { afternoon, morning } = cell;
+
+              if (afternoon) sum += 0.5;
+              if (morning) sum += 0.5;
+            }
+            return cellsTotal + sum;
+          }, 0)
+        );
+      }, 0);
+    }
+  )(state);

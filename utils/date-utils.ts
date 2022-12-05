@@ -1,7 +1,7 @@
 import moment, { Moment } from 'moment';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { HeadCols } from '../activity-report/timesheet/timesheet-head.component';
+import { HeadCols } from '../activity-report/head/timesheet/timesheet-head.component';
 import { holidaysSelectors } from '../holidays/holidays.selectors';
 
 export type Month = moment.Moment;

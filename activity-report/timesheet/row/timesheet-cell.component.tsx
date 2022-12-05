@@ -1,9 +1,11 @@
 import { Typography } from 'antd';
 import React, { FC, memo } from 'react';
 import { useSelector } from 'react-redux';
-import { Id } from '../../utils/types';
-import { activitySelector } from '../activity-report-sheet.selectors';
-import { HeadCol } from './timesheet-head.component';
+import { Id } from '../../../utils/types';
+import { activitySelector } from '../../activity-report-sheet.selectors';
+import { HeadCol } from '../head/timesheet-head.component';
+import { TimesheetCellSelectionLayer } from './selection/timesheet-cell-selection-layer.component';
+import cls from 'classnames';
 
 interface Props extends HeadCol {
   activityReportId?: Id;
@@ -11,40 +13,52 @@ interface Props extends HeadCol {
 
 export const TimesheetCell: FC<Props> = (props) => {
   const { isDisabled, isHoliday, isWeekend, activityReportId, day } = props;
-  const cell = {};
+  const cell = useSelector(activitySelector(activityReportId, day));
 
   if (isDisabled) return <DisabledTimesheetCell />;
   if (isHoliday) return <HolidayTimesheetCell />;
   if (isWeekend) return <WeekendTimesheetCell />;
 
-  if (!cell) return <td></td>;
+  const className = cls({
+    cell: !!cell,
+    'empty-cell': !cell,
+  });
+
+  if (!cell) return <td className={className}></td>;
 
   return (
-    <td>
+    <td className={className}>
       <Typography.Text code>1</Typography.Text>
+      <TimesheetCellSelectionLayer
+        activityReportId={activityReportId}
+        day={day}
+      />
     </td>
   );
 };
 
 const DisabledTimesheetCell = memo(() => {
+  const className = cls('cell', 'cell-disabled');
   return (
-    <td>
+    <td className={className}>
       <Typography.Text>D</Typography.Text>
     </td>
   );
 });
 
 const HolidayTimesheetCell = memo(() => {
+  const className = cls('cell', 'cell-holiday');
   return (
-    <td>
+    <td className={className}>
       <Typography.Text>H</Typography.Text>
     </td>
   );
 });
 
 const WeekendTimesheetCell = memo(() => {
+  const className = cls('cell', 'cell-weekend');
   return (
-    <td>
+    <td className={className}>
       <Typography.Text>
         <small>W</small>
       </Typography.Text>

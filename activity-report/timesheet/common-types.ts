@@ -1,4 +1,5 @@
-import { HeadCols } from './timesheet-head.component';
+import { Id } from '../../utils/types';
+import { HeadCols } from './head/timesheet-head.component';
 
 export type HalfDay = {
   is: boolean;
@@ -41,19 +42,21 @@ export enum SheetStatus {
   APPROVED = 'APPROVED',
 }
 
+export type Cells<T> = Record<Id, SheetCell<T>>;
+
 // Each Activity has many Cells
 export type SheetRow<P, T> = {
-  ids: string[];
-  entities: Record<string, SheetCell<T>>;
+  ids: Id[];
+  entities: Cells<T>;
   meta: P;
 };
 
-export type SheetRows<P, T> = SheetRow<P, T>[];
+export type SheetRows<P, T> = Record<Id, SheetRow<P, T>>;
 
 // Each Activity Report has many Activities
 export type SheetData<P, T> = {
-  ids: number[];
-  entities: Record<number, SheetRow<P, T>>;
+  ids: Id[];
+  entities: SheetRows<P, T>;
   month: string;
   columns: HeadCols;
   editable?: boolean;
