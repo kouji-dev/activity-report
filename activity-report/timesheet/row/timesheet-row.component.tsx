@@ -1,10 +1,10 @@
 import React, { FC, memo } from 'react';
 import { useSelector } from 'react-redux';
-import { projectByActivityReportIdSelector } from '../../project/project.selectors';
-import { useSheetColumns } from '../../utils/date-utils';
-import { Id } from '../../utils/types';
+import { projectByActivityReportIdSelector } from '../../../project/project.selectors';
+import { useSheetColumns } from '../../../utils/date-utils';
+import { Id } from '../../../utils/types';
 import { TimesheetCell } from './timesheet-cell.component';
-import { TimesheetRowTotal } from './timesheet-row-total.component';
+import { TimesheetRowTotal } from '../total/timesheet-row-total.component';
 
 interface Props {
   activityReportId?: Id;

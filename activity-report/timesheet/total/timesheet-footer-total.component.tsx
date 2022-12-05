@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSheetColumns } from '../../utils/date-utils';
+import { useSheetColumns } from '../../../utils/date-utils';
 import { TimesheetColumnTotal } from './timesheet-column-total.component';
-import { HeadCol } from './timesheet-head.component';
+import { HeadCol } from '../head/timesheet-head.component';
 import { TimesheetTotal } from './timesheet-total.component';
 
 export const TimesheetFooterTotal = () => {

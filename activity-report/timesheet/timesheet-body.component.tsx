@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../../store';
 import { Id } from '../../utils/types';
 import { activityReportIdsSelector } from '../activity-report-sheet.selectors';
-import { TimesheetRow } from './timesheet-row.component';
+import { TimesheetRow } from './row/timesheet-row.component';
 
 interface Props {}
 

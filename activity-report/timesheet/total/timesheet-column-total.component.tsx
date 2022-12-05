@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { dayTotalSelector } from '../activity-report-sheet.selectors';
-import { HeadCol } from './timesheet-head.component';
+import { dayTotalSelector } from '../../activity-report-sheet.selectors';
+import { HeadCol } from '../head/timesheet-head.component';
 
 interface Props extends HeadCol {}
 
