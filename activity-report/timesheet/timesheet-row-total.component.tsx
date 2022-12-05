@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Id } from '../../utils/types';
-import { sheetRowTotal } from '../activity-report-sheet.selectors';
+import { activityReportTotalSelector } from '../activity-report-sheet.selectors';
 
 interface Props {
   activityReportId: Id;
@@ -9,6 +9,6 @@ interface Props {
 
 export const TimesheetRowTotal: FC<Props> = (props) => {
   const { activityReportId } = props;
-  const total = useSelector(sheetRowTotal(activityReportId));
+  const total = useSelector(activityReportTotalSelector(activityReportId));
   return <td>{total}</td>;
 };

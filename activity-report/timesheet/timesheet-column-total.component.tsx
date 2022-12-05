@@ -7,6 +7,6 @@ interface Props extends HeadCol {}
 
 export const TimesheetColumnTotal: FC<Props> = (props) => {
   const { day } = props;
-  const total = 0;
+  const total = useSelector(dayTotalSelector(day));
   return <td>{total}</td>;
 };
