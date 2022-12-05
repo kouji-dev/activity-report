@@ -4,7 +4,7 @@ import { IRootState } from '../../store';
 import { Id } from '../../utils/types';
 import { activityReportIdsSelector } from '../activity-report-sheet.selectors';
 import { TimesheetRow } from './row/timesheet-row.component';
-import { TimesheetCellSelectionProvider } from './row/selection/timesheet-cell-selection.context';
+import { TimesheetSelectionProvider } from './row/selection/timesheet-selection.context';
 
 interface Props {}
 
@@ -15,14 +15,14 @@ export const TimesheetBody: FC<Props> = (props) => {
 
   return (
     <tbody>
-      <TimesheetCellSelectionProvider>
+      <TimesheetSelectionProvider>
         {activityReports.map((activityReportId) => (
           <TimesheetRow
             key={activityReportId}
             activityReportId={activityReportId}
           />
         ))}
-      </TimesheetCellSelectionProvider>
+      </TimesheetSelectionProvider>
     </tbody>
   );
 };

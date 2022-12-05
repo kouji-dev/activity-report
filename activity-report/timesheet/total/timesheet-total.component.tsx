@@ -4,7 +4,7 @@ import { sheetTotalSelector } from '../../activity-report-sheet.selectors';
 
 interface Props {}
 
-export const TimesheetTotal: FC<Props> = memo(() => {
+export const TimesheetTotal: FC<Props> = () => {
   const total = useSelector(sheetTotalSelector);
   return <td>{total}</td>;
 };
