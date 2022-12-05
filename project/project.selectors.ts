@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { sheetRowSelector } from '../activity-report/activity-report-sheet.selectors';
+import { activityReportSelector } from '../activity-report/activity-report-sheet.selectors';
 import { IProject } from '../models/project.model';
 import { IRootState } from '../store';
 import { Id } from '../utils/types';
@@ -28,7 +28,7 @@ export const projectByActivityReportIdSelector =
   (activityReportId: Id) => (state: IRootState) =>
     createSelector<IRootState, number, IProject>(
       projectEntitiesSelector,
-      sheetRowSelector,
+      activityReportSelector,
       (entities, activityReport) => {
         if (!activityReport) return;
         const {

@@ -23,7 +23,7 @@ export const isSheetEditableSelector = createSelector(
   (state: ActivityReportSheetState) => state.editable
 );
 
-const activityReportSelector = createSelector(
+export const activityReportSelector = createSelector(
   sheetDataSelector,
   (_, activityReportId) => activityReportId,
   (entities, activityReportId) => entities[activityReportId]
