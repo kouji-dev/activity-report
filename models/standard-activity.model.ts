@@ -59,7 +59,7 @@ const randomDay = () => {
   };
 };
 
-const getNextDay = randomDay();
+let getNextDay = randomDay();
 
 const baseDate = moment();
 
@@ -71,7 +71,12 @@ const _fakeStandardActivity = (activityReportId: number): IStandardActivity => {
   const morning = faker.datatype.boolean();
   const afternoon = faker.datatype.boolean();
 
-  const nextDay = getNextDay();
+  let nextDay = getNextDay();
+
+  if (!nextDay) {
+    getNextDay = randomDay();
+    nextDay = getNextDay();
+  }
 
   const date = toServerFormat(baseDate.date(nextDay));
 

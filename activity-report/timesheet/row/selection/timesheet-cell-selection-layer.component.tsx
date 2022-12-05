@@ -1,7 +1,8 @@
-import React, { FC, memo, PointerEventHandler } from 'react';
+import React, { FC, memo, useMemo } from 'react';
 import { Id } from '../../../../utils/types';
 import { useTimesheetSelectionData } from './timesheet-selection.context';
 import cls from 'classnames';
+import { getKey } from '../../../../utils/sheet-utils';
 
 interface Props {
   activityReportId: Id;
@@ -10,55 +11,15 @@ interface Props {
 
 export const TimesheetCellSelectionLayer: FC<Props> = memo((props) => {
   const { activityReportId, day } = props;
-  const ctx = useTimesheetSelectionData(activityReportId, day);
+  const { range, dragging } = useTimesheetSelectionData(activityReportId, day);
 
-  const className = cls('cell-selection-layer', {
-    'cell-selected': false,
+  const key = useMemo(() => getKey(activityReportId, day), []);
+
+  const rootCls = 'cell-selection-layer';
+  const className = cls(rootCls, {
+    'cell-selected': range.has(key),
+    'cell-dragging': dragging,
   });
 
-  const onPointerDown: PointerEventHandler<HTMLDivElement> = (ev) => {
-    console.log({
-      source: 'down',
-      ev,
-    });
-  };
-
-  const onPointerMove: PointerEventHandler<HTMLDivElement> = (ev) => {
-    console.log({
-      source: 'move',
-      ev,
-    });
-  };
-
-  const onPointerUp: PointerEventHandler<HTMLDivElement> = (ev) => {
-    console.log({
-      source: 'up',
-      ev,
-    });
-  };
-
-  const onPointerCancel: PointerEventHandler<HTMLDivElement> = (ev) => {
-    console.log({
-      source: 'cancel',
-      ev,
-    });
-  };
-
-  const onPointerCancelCapture: PointerEventHandler<HTMLDivElement> = (ev) => {
-    console.log({
-      source: 'cancel capture',
-      ev,
-    });
-  };
-
-  return (
-    <div
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerCancel}
-      onPointerCancelCapture={onPointerCancelCapture}
-      className={className}
-    />
-  );
+  return <div className={className} />;
 });

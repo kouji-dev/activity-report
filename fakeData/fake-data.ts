@@ -24,7 +24,7 @@ import { ProjectState } from '../store/project.state';
 import keyBy from 'lodash.keyby';
 import memoize from 'lodash.memoize';
 
-const fakeProjects = (p: number = 2) => {
+const fakeProjects = (p: number = 20) => {
   return [...Array(p).keys()].map(() => fakeProject());
 };
 

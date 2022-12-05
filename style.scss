@@ -5,31 +5,29 @@
 }
 
 table {
-  thead {
-    tr {
-      th {
-        min-width: var(--cell-width);
-        height: 36px;
-        & > .cell,
-        & > .cell-project {
-          display: flex;
-          flex-flow: column;
-          justify-content: center;
-          user-select: none;
-          height: 100%;
-          border: 1px solid var(--timesheet-border-color);
-        }
-        & > .cell {
-          max-width: var(--cell-max-width);
-        }
-      }
+  th {
+    min-width: var(--cell-width);
+    height: 36px;
+    & > .cell,
+    & > .cell-project {
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      height: 100%;
+      border: 1px solid var(--timesheet-border-color);
+    }
+    & > .cell {
+      max-width: var(--cell-max-width);
     }
   }
-  tr {
-    td {
-      position: relative;
-      text-align: center;
-    }
+  td {
+    position: relative;
+    text-align: center;
+  }
+
+  th,
+  td {
+    user-select: none;
   }
 }
 
@@ -39,4 +37,13 @@ table {
   right: 0;
   left: 0;
   bottom: 0;
+  z-index: -1;
+}
+
+.cell-selected {
+  background-color: #f9fae1;
+}
+
+.cell-dragging {
+  cursor: grab;
 }
